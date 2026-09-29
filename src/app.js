@@ -10,6 +10,7 @@ const corsOptions  = require('./config/cors');
 const rateLimiter  = require('./config/rateLimiter');
 const logger       = require('./config/logger');
 const apiRouter    = require('./routes');
+const { getHealth } = require('./controllers/health.controller');
 const { notFound, errorHandler } = require('./middlewares/errorHandler');
 const requestId    = require('./middlewares/requestId');
 
@@ -36,6 +37,7 @@ app.use(
 app.use('/api', rateLimiter);
 
 // ─── Routes ──────────────────────────────────────────────────────────────────
+app.get('/', getHealth);
 app.use('/api', apiRouter);
 
 // ─── Error Handling ──────────────────────────────────────────────────────────
